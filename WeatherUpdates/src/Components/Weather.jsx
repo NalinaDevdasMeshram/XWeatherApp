@@ -7,8 +7,11 @@ const Weather = () => {
   const [loading, setLoading] = useState(false);
 
   const API_Key = "58415bfe526d482ca1d80858242705";
-
   const fetchWeatherApi = async () => {
+    if (!city) {
+      alert("Failed to fetch weather data");
+      return;
+    }
     setLoading(true);
     setWeather(null);
     try {
@@ -32,6 +35,7 @@ const Weather = () => {
         placeholder="Enter city name"
         value={city}
         onChange={(e) => setCity(e.target.value)}
+        required
       />
       <button onClick={fetchWeatherApi}>Search</button>
 
