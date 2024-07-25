@@ -10,6 +10,7 @@ const Weather = () => {
   const fetchWeatherApi = async () => {
     if (!city) {
       alert("Failed to fetch weather data");
+      return;
     }
     setLoading(true);
     setWeather(null);
@@ -34,27 +35,23 @@ const Weather = () => {
         placeholder="Enter city name"
         value={city}
         onChange={(e) => setCity(e.target.value)}
-        required
       />
       <button onClick={fetchWeatherApi}>Search</button>
 
       {loading && <p>loading data...</p>}
       {weather && (
-        <div className="weather-cards">
+        <div className="weatherCards">
           <div className="weather-card">
-            <p onChange={(e) => setWeather(e.target.value)}>
-              <h4>Tempature</h4>
-              {weather.current.temp_c}°C
-            </p>
+            <p>Tempature {weather.current.temp_c}°C</p>
+          </div>
+          <div className="weatherCard">
+            <p> Humidity {weather.current.humidity}% </p>
           </div>
           <div className="weather-card">
-            <p>Humidity {weather.current.humidity}%</p>
+            <p> Condition {weather.current.condition.text} </p>
           </div>
           <div className="weather-card">
-            <p>Condition {weather.current.condition.text}</p>
-          </div>
-          <div className="weather-card">
-            <p>Wind Speed {weather.current.wind_kph} kph</p>
+            <p> Wind Speed {weather.current.wind_kph} kph </p>
           </div>
         </div>
       )}
