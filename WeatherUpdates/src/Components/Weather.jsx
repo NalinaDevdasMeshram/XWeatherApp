@@ -8,6 +8,9 @@ const Weather = () => {
 
   const API_Key = "58415bfe526d482ca1d80858242705";
   const fetchWeatherApi = async () => {
+    if (!city) {
+      alert("Failed to fetch weather data");
+    }
     setLoading(true);
     setWeather(null);
     try {
@@ -19,7 +22,6 @@ const Weather = () => {
       setWeather(Result);
     } catch (e) {
       console.log("fetch weather App", e.message);
-      alert("Failed to fetch weather data");
     } finally {
       setLoading(false);
     }
