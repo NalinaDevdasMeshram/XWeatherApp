@@ -2,16 +2,16 @@ import styles from "../Components/Weather.module.css";
 import { useState } from "react";
 
 const Weather = () => {
-  const [city, setCity] = useState("");
+  const [city, setCity] = useState(" ");
   const [weather, setWeather] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const API_Key = "58415bfe526d482ca1d80858242705";
   const fetchWeatherApi = async () => {
-    if (!city) {
-      alert("Failed to fetch weather data");
-      return;
-    }
+    // if (!city) {
+    //   alert("Failed to fetch weather data");
+    //   return;
+    // }
     setLoading(true);
     setWeather(null);
     try {
@@ -35,23 +35,22 @@ const Weather = () => {
         placeholder="Enter city name"
         value={city}
         onChange={(e) => setCity(e.target.value)}
-        required
       />
       <button onClick={fetchWeatherApi}>Search</button>
 
       {loading && <p>Loading data...</p>}
       {weather && (
         <div className="weatherCards">
-          <div className="weather-card">
+          <div className="weatherCard">
             <p>Tempature {weather.current.temp_c}°C</p>
           </div>
           <div className="weatherCard">
             <p> Humidity {weather.current.humidity}% </p>
           </div>
-          <div className="weather-card">
+          <div className="weatherCard">
             <p> Condition {weather.current.condition.text} </p>
           </div>
-          <div className="weather-card">
+          <div className="weatherCard">
             <p> Wind Speed {weather.current.wind_kph} kph </p>
           </div>
         </div>
