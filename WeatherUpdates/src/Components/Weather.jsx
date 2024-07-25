@@ -40,17 +40,17 @@ const Weather = () => {
 
       {loading && <p>Loading data...</p>}
       {weather && (
-        <div className="weatherCards">
-          <div className="weatherCard">
+        <div className="weather-cards">
+          <div className="weather-card">
             <p>Tempature {weather.current.temp_c}°C</p>
           </div>
-          <div className="weatherCard">
+          <div className="weather-card">
             <p> Humidity {weather.current.humidity}% </p>
           </div>
-          <div className="weatherCard">
+          <div className="weather-card">
             <p> Condition {weather.current.condition.text} </p>
           </div>
-          <div className="weatherCard">
+          <div className="weather-card">
             <p> Wind Speed {weather.current.wind_kph} kph </p>
           </div>
         </div>
