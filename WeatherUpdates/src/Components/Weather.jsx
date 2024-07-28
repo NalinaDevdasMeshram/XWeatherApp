@@ -1,17 +1,11 @@
-import styles from "../Components/Weather.module.css";
-import { useState } from "react";
-
+import styles from "./Weathers.module.css";
+import { useEffect, useState } from "react";
 const Weather = () => {
-  const [city, setCity] = useState(" ");
+  const [city, setCity] = useState("");
   const [weather, setWeather] = useState(null);
   const [loading, setLoading] = useState(false);
-
   const API_Key = "58415bfe526d482ca1d80858242705";
   const fetchWeatherApi = async () => {
-    // if (!city) {
-    //   alert("Failed to fetch weather data");
-    //   return;
-    // }
     setLoading(true);
     setWeather(null);
     try {
@@ -19,15 +13,19 @@ const Weather = () => {
         `https://api.weatherapi.com/v1/current.json?key=${API_Key}&q=${city}`
       );
       const Result = await Response.json();
-      console.log("result", Result);
       setWeather(Result);
     } catch (e) {
-      console.log("fetch weather App", e.message);
+      alert("Failed to fetch weather data: " + e.message);
     } finally {
       setLoading(false);
     }
   };
-
+  useEffect(() => {
+    fetchWeatherApi();
+  }, []);
+  const handleSearch = () => {
+    fetchWeatherApi();
+  };
   return (
     <div className={styles.weatherContainer}>
       <input
@@ -36,22 +34,25 @@ const Weather = () => {
         value={city}
         onChange={(e) => setCity(e.target.value)}
       />
-      <button onClick={fetchWeatherApi}>Search</button>
-
+      <button onClick={handleSearch}>Search</button>
       {loading && <p>Loading data...</p>}
-      {weather && (
-        <div className="weather-cards">
-          <div className="weather-card">
-            <p>Tempature {weather.current.temp_c}°C</p>
+      {weather && weather.current && (
+        <div className={styles.weatherCards}>
+          <div className={styles.weatherCard}>
+            <h3>Tempature </h3>
+            <p> {weather.current.temp_c}°C</p>
           </div>
-          <div className="weather-card">
-            <p> Humidity {weather.current.humidity}% </p>
+          <div className={styles.weatherCard}>
+            <h3>Humidity</h3>
+            <p>{weather.current.humidity}%</p>
           </div>
-          <div className="weather-card">
-            <p> Condition {weather.current.condition.text} </p>
+          <div className={styles.weatherCard}>
+            <h3> Condition </h3>
+            <p>{weather.current.condition.text}</p>
           </div>
-          <div className="weather-card">
-            <p> Wind Speed {weather.current.wind_kph} kph </p>
+          <div className={styles.weatherCard}>
+            <h3> Wind Speed </h3>
+            <p>{weather.current.wind_kph} kph</p>
           </div>
         </div>
       )}
