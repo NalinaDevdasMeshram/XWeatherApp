@@ -37,20 +37,20 @@ const Weather = () => {
       <button onClick={handleSearch}>Search</button>
       {loading && <p>Loading data...</p>}
       {weather && weather.current && (
-        <div className={styles.weatherCards}>
-          <div className={styles.weatherCard}>
+        <div className="weather-cards">
+          <div className="weather-card">
             <h3>Tempature </h3>
             <p> {weather.current.temp_c}°C</p>
           </div>
-          <div className={styles.weatherCard}>
+          <div className="weather-card">
             <h3>Humidity</h3>
             <p>{weather.current.humidity}%</p>
           </div>
-          <div className={styles.weatherCard}>
+          <div className="weather-card">
             <h3> Condition </h3>
             <p>{weather.current.condition.text}</p>
           </div>
-          <div className={styles.weatherCard}>
+          <div className="weather-card">
             <h3> Wind Speed </h3>
             <p>{weather.current.wind_kph} kph</p>
           </div>
